@@ -9,4 +9,6 @@
 body {
   font-family: 'Oleo Script', cursive;
   font-size: 16px;
+  background-image: url("./Assets/background_pic.png");
+  background-repeat: repeat;
 }
