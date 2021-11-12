@@ -5,7 +5,8 @@ const db = require('../models/index');
 const getLogin = async (req, res) => {
   try {
     const username = req.params.username;
-    const user = await db.User.findOne({where: {username: username}});
+    const user = await db.User.findOne({ where: {username: username}, include: [{ model: Collection}, { model: Wishlist }]
+  });
     res.status(200);
     res.send(user);
   } catch (err) {
