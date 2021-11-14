@@ -2,7 +2,7 @@ import './NavBar.css';
 import vinyl_icon from '../../Assets/vinyl_icon.png';
 import search_icon from '../../Assets/search_icon.png';
 import React from 'react';
-import {  Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function NavBar() {
 

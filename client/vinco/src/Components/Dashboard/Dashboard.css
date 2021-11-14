@@ -1,0 +1,61 @@
+.home-page-top {
+  margin-top: 60px;
+  margin-left: 110px;
+  font-size: 32px;
+}
+
+.header-title {
+  position: absolute;
+  z-index: 4;
+  width: 550px;
+}
+
+.home-page-pic {
+  position: relative; 
+  z-index: 2;
+  margin-left: 550px;
+  border-radius: 60px;
+  opacity: 70%;
+  width: 730px;
+  height: 486px;
+}
+
+.login-button,
+.signin-button,
+.my-collection-button {
+  background-color: black;
+  box-shadow: 2px 2px 2px gray;
+  font-family: 'Oleo Script', cursive;
+  color: white;
+  font-size: 24px;
+  width: 154px;
+  height: 44px;
+  border-radius: 22px;
+  border: none;
+  position: absolute;
+  z-index: 3;
+}
+
+.my-collection-button {
+  left: 7%;
+  top: 64%;
+}
+
+.signin-button {
+  left: 78%;
+  top: 80%;
+}
+
+.login-button {
+  left: 78%;
+  top: 72%;
+}
+
+.dancing-icon {
+  position: absolute;
+  z-index: 3;
+  left: 7%;
+  top: 79%;
+  width: 90px;
+  height: 90px;
+}

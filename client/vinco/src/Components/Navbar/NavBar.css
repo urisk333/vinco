@@ -45,6 +45,18 @@ h3 {
   margin-left: 72px;
 }
 
+a:link {
+  text-decoration: none;
+}
+
+a:visited {
+  color: white;
+}
+
+a:hover {
+  color: #FFDB65;
+}
+
 .search-bar {
   width: 320px;
 }
@@ -69,7 +81,7 @@ input {
 .search-icon {
   position: absolute;
   top: 38px;
-  right: 50px;
+  right: 28px;
   width: 38px;
   height: 38px;
   z-index: 1;
