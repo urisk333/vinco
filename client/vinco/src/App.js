@@ -8,6 +8,7 @@ import NavBar from './Components/Navbar/NavBar';
 import Collection from './Components/CollectionList/Collection';
 import Wishlist from './Components/WishlistList/Wishlist';
 import Favorites from './Components/FavoritesList/Favorites';
+import AddToCollection from './Components/AddToCollection/AddToCollection';
 import { RecRatingContext, RecRemoveContext } from './Context';
 
 function App() {
@@ -131,11 +132,12 @@ function App() {
       <Router>
         <NavBar />
           <Routes>
+            <Route path="/" element={<Dashboard getUser={getUser} user={user} />}></Route>
+            <Route path="/users/:username" element={<Dashboard />}></Route>
             <Route path="/collections" element={<Collection collectionListRecs={collectionListRecs} />}></Route>
             <Route path="/favorites" element={<Favorites collectionListRecs={collectionListRecs} />}></Route>
             <Route path="/wishlists" element={<Wishlist wishlistListRecs={wishlistListRecs} />}></Route>
-            <Route path="/users/:username" element={<Dashboard />}></Route>
-            <Route path="/" element={<Dashboard getUser={getUser} user={user} />}></Route>
+            <Route path="/add" element={<AddToCollection />}></Route>
           </Routes>
       </Router>  
       </RecRemoveContext.Provider>

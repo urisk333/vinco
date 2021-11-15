@@ -29,7 +29,9 @@ function NavBar() {
               <Link to="wishlists">Wishlist</Link>
             </h3>
             <h3>Other Collections</h3>
-            <h3>Chat</h3>
+            <h3>
+              <Link to="add">Add</Link>
+            </h3>
           </div>
           <div className="search-bar">
             <input className="search-input" type="text" placeholder="Search by artist..."></input>
