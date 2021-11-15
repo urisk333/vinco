@@ -25,8 +25,9 @@
 }
 
 .record-image:hover {
-  --webkit-filter: blur(2px);
-  filter: blur(2px);
+  width: 400px;
+  height: 400px;
+  transition: 500ms ease-in-out;
 }
 
 .record-item p {

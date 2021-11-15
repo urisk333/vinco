@@ -13,7 +13,9 @@ function NavBar() {
           <img className="vinyl-icon" src={vinyl_icon} alt="vinyl icon" />
         </div>
         <div className="app-name">
-          <h1>VinCo</h1>
+          <h1>
+            <Link to="homepage">VinCo</Link>
+          </h1>
         </div>
         <div className="navbar">
           <div className="navbar-links">

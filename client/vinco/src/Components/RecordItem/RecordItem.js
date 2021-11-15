@@ -28,7 +28,7 @@ function RecordItem ({ record }) {
           fullIcon={<i className="fa fa-star"></i>}
           activeColor="#FFDB65"
         />
-        <button className="delete-record" type="submit">Delete</button>
+        <button className="delete-record" type="submit" >Delete</button>
       </div>
     </div>
   )

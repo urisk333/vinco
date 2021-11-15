@@ -6,13 +6,11 @@
 
 .header-title {
   position: absolute;
-  z-index: 4;
   width: 550px;
 }
 
 .home-page-pic {
   position: relative; 
-  z-index: 2;
   margin-left: 550px;
   border-radius: 60px;
   opacity: 70%;
@@ -33,12 +31,12 @@
   border-radius: 22px;
   border: none;
   position: absolute;
-  z-index: 3;
 }
 
 .my-collection-button {
   left: 7%;
   top: 64%;
+  width: 184px;
 }
 
 .signin-button {
@@ -51,11 +49,16 @@
   top: 72%;
 }
 
+.my-collection-button:hover,
+.signin-button:hover,
+.login-button:hover {
+  color: #FFDB65;
+}
+
 .dancing-icon {
   position: absolute;
-  z-index: 3;
   left: 7%;
-  top: 79%;
+  top: 78%;
   width: 90px;
   height: 90px;
 }

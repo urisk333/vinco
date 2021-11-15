@@ -19,7 +19,7 @@
   z-index: 100;
   border: 5px solid white;
   background-color: #FFDB65;
-  margin-left: calc(50% - 290px);
+  margin-left: calc(50% - 370px);
   text-align: center;
   font-size: larger;
 }
@@ -27,11 +27,13 @@
 .login-form-title {
   margin-top: 20px;
   margin-bottom: 20px;
+  font-size: 28px;
 }
 
 .login-form-input {
   display: flex;
   flex-direction: column;
+  font-size: 20px;
 }
 
 .login-input-username,
@@ -60,11 +62,3 @@
   border: none;
   margin-top: 28px;
 }
-
-.login-container {
-  visibility: hidden;
-}
-
-.login-clicked {
-  visibility: visible;
-} 

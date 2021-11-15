@@ -30,3 +30,13 @@ body::-webkit-scrollbar-thumb {
 html {
   overflow-y: scroll;
 }
+
+button, button:active, button:visited, button:focus, button:hover {
+  cursor: pointer;
+  border: none;
+  outline: none;
+}
+
+button:active {
+  height: 42px;
+}

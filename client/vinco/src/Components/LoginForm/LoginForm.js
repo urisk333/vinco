@@ -1,7 +1,13 @@
-import './LoginForm.css'
+import './LoginForm.css';
 import React from 'react';
 
-function LoginForm () {
+function LoginForm ({getUser, user, handleShowLogin}) {
+
+  function handleSubmit (e) {
+    e.preventDefault();
+    getUser(user);
+    handleShowLogin(); 
+  }
 
   return (
     <div className="login-container">
@@ -15,7 +21,7 @@ function LoginForm () {
           <input className="login-input-password" type="password" placeholder="Enter password..." required></input>
         </div> 
         <div className="login-form-button">
-          <button className="log-in-button" type="submit">Submit</button>
+          <button className="log-in-button" type="submit" onClick={() => {handleSubmit()}}>Submit</button>
           <button className="log-in-button" type="submit">Cancel</button>
         </div> 
       </form>

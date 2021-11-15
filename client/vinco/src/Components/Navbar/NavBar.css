@@ -57,6 +57,14 @@ a:hover {
   color: #FFDB65;
 }
 
+h1 a:visited {
+  color: black;
+}
+
+h1 a:hover {
+  color: white;
+}
+
 .search-bar {
   width: 320px;
 }

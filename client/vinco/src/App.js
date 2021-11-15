@@ -8,23 +8,24 @@ import NavBar from './Components/Navbar/NavBar';
 import Collection from './Components/CollectionList/Collection';
 import Wishlist from './Components/WishlistList/Wishlist';
 import Favorites from './Components/FavoritesList/Favorites';
-import LoginForm from './Components/LoginForm/LoginForm';
 
 function App() {
   
   const [user, setUser] = useState('');
   const [collectionListRecs, setCollectionListRecs] = useState([]);
   const [wishlistListRecs, setWishlistListRecs] = useState([]);
+  
 
   const getUser = (username) => {
-
-    ApiService.getLogin(username)
-      .then(user => {
-        setUser(user.username)
-      })
-
-    // console.log('user', name);
-    // setUser(...user, { username: name });
+    
+    if (username !== '') {
+      ApiService.getLogin(username)
+        .then(user => {
+          setUser(user.username)
+        })
+    } else {
+      console.log('Please fill in all form fields.');
+    }
   }
 
 
@@ -114,10 +115,10 @@ function App() {
             <Route path="/collections" element={<Collection collectionListRecs={collectionListRecs} />}></Route>
             <Route path="/favorites" element={<Favorites collectionListRecs={collectionListRecs} />}></Route>
             <Route path="/wishlists" element={<Wishlist wishlistListRecs={wishlistListRecs} />}></Route>
+            <Route path="/users/:username" element={<Dashboard />}></Route>
+            <Route path="/homepage" element={<Dashboard getUser={getUser} user={user} />}></Route>
           </Routes>
       </Router>  
-      <Dashboard />
-      <LoginForm getUser={getUser} user={user}/>
     </div>
   );
 }
