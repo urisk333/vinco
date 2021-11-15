@@ -1,14 +1,33 @@
 import './RecordItem.css';
 import React from 'react';
 import ReactStars from "react-rating-stars-component";
+import { useContext } from 'react';
+import { RecRatingContext, RecRemoveContext } from '../../Context';
 
-function RecordItem ({ record }) {
+function RecordItem ({ record, isCollection }) {
 
-  const ratingChanged = (newRating) => {
-    console.log(newRating);
-  };
+  const { updateRatingFromCollection, updateRatingFromWishlist } = useContext(RecRatingContext);
+  const { removeFromCollection, removeFromWishlist } = useContext(RecRemoveContext);
+
+  function handleRatingChange (newRating) {
+
+    if (isCollection === true) {
+      updateRatingFromCollection(record.id, newRating);
+    } else {
+      updateRatingFromWishlist(record.id, newRating);
+    }
+  }
+
+  function handleRemoveItem (e) {
+    e.preventDefault();
+
+    if (isCollection === true) {
+      removeFromCollection(record.id)
+    } else {
+      removeFromWishlist(record.id)
+    }
+  }
   
-  console.log("RECORD ITEM", record)
   return (
     <div className="record-container">
       <div className="record-item">
@@ -20,7 +39,7 @@ function RecordItem ({ record }) {
         <ReactStars
           classNames="rating-stars"
           count={5}
-          onChange={ratingChanged}
+          onChange={handleRatingChange}
           size={24}
           isHalf={true}
           emptyIcon={<i className="far fa-star"></i>}
@@ -28,7 +47,7 @@ function RecordItem ({ record }) {
           fullIcon={<i className="fa fa-star"></i>}
           activeColor="#FFDB65"
         />
-        <button className="delete-record" type="submit" >Delete</button>
+        <button className="delete-record" type="submit" onClick={handleRemoveItem}>Delete</button>
       </div>
     </div>
   )

@@ -14,7 +14,7 @@ function NavBar() {
         </div>
         <div className="app-name">
           <h1>
-            <Link to="homepage">VinCo</Link>
+            <Link to="/">VinCo</Link>
           </h1>
         </div>
         <div className="navbar">

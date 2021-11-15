@@ -27,6 +27,16 @@ function getOneFromCollection (id) {
   return fetchRecords(`/collections/${id}`);
 }
 
+function updateRatingFromCollection (id, rating) {
+  return fetchRecords(`/collections/${id}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      rating: rating
+    })
+  });
+}
+
 function removeFromCollection (id) {
   return fetchRecords(`/collections/${id}`, {
     method: "DELETE"
@@ -49,6 +59,16 @@ function getOneFromWishlist (id) {
   return fetchRecords(`/wishlists/${id}`)
 }
 
+function updateRatingFromWishlist (id, rating) {
+  return fetchRecords(`/wishlists/${id}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      rating: rating
+    })
+  });
+}
+
 function removeFromWishlist (id) {
   return fetchRecords(`/wishlists/${id}`, {
     method: "DELETE"
@@ -60,10 +80,12 @@ const ApiService = {
   addToCollection,
   getAllFromCollection,
   getOneFromCollection,
+  updateRatingFromCollection,
   removeFromCollection,
   addToWishlist,
   getAllFromWishlist,
   getOneFromWishlist,
+  updateRatingFromWishlist,
   removeFromWishlist
 }
 

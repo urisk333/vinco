@@ -6,12 +6,12 @@ function Wishlist ({ wishlistListRecs }) {
 
   if (wishlistListRecs) {
 
-    return wishlistListRecs.map(record => <RecordItem record={record} key={record.id} />);
+    return wishlistListRecs.map(record => <RecordItem record={record} key={record.id} isCollection={false} />);
   }
 
   return (
     <div id="list">
-      <RecordItem />
+      <RecordItem isCollection={false} />
     </div>
   )
 }

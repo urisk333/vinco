@@ -9,6 +9,10 @@ function LoginForm ({getUser, user, handleShowLogin}) {
     handleShowLogin(); 
   }
 
+  function handleCancel () {
+    window.location.href = ("/");
+  }
+
   return (
     <div className="login-container">
       <div className="background-image"></div>
@@ -22,7 +26,7 @@ function LoginForm ({getUser, user, handleShowLogin}) {
         </div> 
         <div className="login-form-button">
           <button className="log-in-button" type="submit" onClick={() => {handleSubmit()}}>Submit</button>
-          <button className="log-in-button" type="submit">Cancel</button>
+          <button className="log-in-button" type="submit" onClick={() => {handleCancel()}}>Cancel</button>
         </div> 
       </form>
     </div>

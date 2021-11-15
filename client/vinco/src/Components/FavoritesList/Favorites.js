@@ -5,15 +5,15 @@ import RecordItem from '../RecordItem/RecordItem';
 function Favorites ({ collectionListRecs }) {
 
   if (collectionListRecs) {
-    // console.log('RECORDS', collectionListRecs)
+
     return collectionListRecs
       .filter(record => record.rating > 4)
-      .map(record => <RecordItem record={record} key={record.id} />) 
+      .map(record => <RecordItem record={record} key={record.id} isCollection={true}/>) 
   }
   
   return (
     <div id="list">
-      <RecordItem />
+      <RecordItem isCollection={true}/>
     </div>
   )
 }

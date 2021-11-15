@@ -8,13 +8,16 @@ import NavBar from './Components/Navbar/NavBar';
 import Collection from './Components/CollectionList/Collection';
 import Wishlist from './Components/WishlistList/Wishlist';
 import Favorites from './Components/FavoritesList/Favorites';
+import { RecRatingContext, RecRemoveContext } from './Context';
 
 function App() {
-  
+
   const [user, setUser] = useState('');
   const [collectionListRecs, setCollectionListRecs] = useState([]);
   const [wishlistListRecs, setWishlistListRecs] = useState([]);
-  
+  const [updateRecRatingCollection, setUpdateRecRatingCollection] = useState({});
+  const [updateRecRatingWishlist, setUpdateRecRatingWishlist] = useState({});
+
 
   const getUser = (username) => {
     
@@ -27,6 +30,9 @@ function App() {
       console.log('Please fill in all form fields.');
     }
   }
+
+  // console.log('COLLECTION', collectionListRecs)
+  // console.log('WISHLIST', wishlistListRecs)
 
 
   // function addToCollection (record) {
@@ -45,7 +51,6 @@ function App() {
       
     ApiService.getAllFromCollection()
         .then(collectionListRecs => {
-          console.log('records', collectionListRecs)
           collectionListRecs
             .sort(function (a, b) {
               if (a.artist < b.artist) return -1;
@@ -57,15 +62,21 @@ function App() {
     }, []);
 
 
-  // function removeFromCollection (id) {
+  function updateRatingFromCollection (id, rating) {
 
-  //   ApiService.removeFromCollection({id})
-  //     .then(collectionListRecs => {
-  //       return collectionListRecs
-  //         .filter(record => record.id !== id);
-  //     })
-  //     .then(records => setCollectionListRecs(records));  
-  // }
+    ApiService.updateRatingFromCollection(id, rating)
+      .then(record => {
+        setUpdateRecRatingCollection({...updateRecRatingCollection, [record.rating]: rating})
+      });
+  }
+
+  
+  async function removeFromCollection (id) {
+
+    await ApiService.removeFromCollection(id);
+    const filteredCollection = collectionListRecs.filter(record => record.id !== id);
+    setCollectionListRecs(filteredCollection);
+  }
     
 
   // function addToWishlist (record) {
@@ -81,7 +92,7 @@ function App() {
 
 
   useEffect(() => {
-    
+
     ApiService.getAllFromWishlist()
         .then(wishlistListRecs => {
           wishlistListRecs
@@ -90,25 +101,33 @@ function App() {
               if (a.artist > b.artist) return 1;
               return 0;
             });
-              console.log('records', wishlistListRecs)
             setWishlistListRecs(wishlistListRecs);
         });
     }, []);
 
 
-    // function removeFromWishlist (id) {
+  function updateRatingFromWishlist (id, rating) {
 
-    //   ApiService.removeFromWishlist({id})
-    //     .then(wishlistListRecs => {
-    //       return wishlistListRecs
-    //         .filter(record => record.id !== id);
-    //     })
-    //     .then(records => setCollectionListRecs(records));  
-    // }
+    ApiService.updateRatingFromWishlist(id, rating)
+      .then(record => {
+        setUpdateRecRatingWishlist({...updateRecRatingWishlist, [record.rating]: rating})
+      });
+  }
+
+
+  async function removeFromWishlist (id) {
+
+    await ApiService.removeFromWishlist(id);
+    const filteredCollection = wishlistListRecs.filter(record => record.id !== id);
+    console.log('FILTERED', filteredCollection)
+    setWishlistListRecs(filteredCollection);
+  }
     
 
   return (
     <div className="App">
+      <RecRatingContext.Provider value={{updateRatingFromCollection, updateRatingFromWishlist}} >
+      <RecRemoveContext.Provider value={{removeFromCollection, removeFromWishlist}} >
       <Router>
         <NavBar />
           <Routes>
@@ -116,9 +135,11 @@ function App() {
             <Route path="/favorites" element={<Favorites collectionListRecs={collectionListRecs} />}></Route>
             <Route path="/wishlists" element={<Wishlist wishlistListRecs={wishlistListRecs} />}></Route>
             <Route path="/users/:username" element={<Dashboard />}></Route>
-            <Route path="/homepage" element={<Dashboard getUser={getUser} user={user} />}></Route>
+            <Route path="/" element={<Dashboard getUser={getUser} user={user} />}></Route>
           </Routes>
       </Router>  
+      </RecRemoveContext.Provider>
+      </RecRatingContext.Provider>
     </div>
   );
 }

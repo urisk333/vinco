@@ -5,13 +5,13 @@ import RecordItem from '../RecordItem/RecordItem';
 function Collection ({ collectionListRecs }) {
 
   if (collectionListRecs) {
-    console.log('RECORDS', collectionListRecs)
-    return collectionListRecs.map(record => <RecordItem record={record} key={record.id} />);
+
+    return collectionListRecs.map(record => <RecordItem record={record} key={record.id} isCollection={true}/>);
   }
   
   return (
     <div id="list">
-      <RecordItem />
+      <RecordItem isCollection={true}/>
     </div>
   )
 }

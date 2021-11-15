@@ -49,11 +49,25 @@ const getOneFromCollection = async (req, res) => {
   }
 }
 
+const updateRatingFromCollection = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const { rating } = req.body;
+    const recUpdated = await db.Collection.update({ rating: rating }, {where: {id: id}});
+    const rec = await db.Collection.findOne({where: {id: id}});
+    res.status(200);
+    res.send(rec);
+  } catch (err) {
+    console.error('error', err);
+    res.sendStatus(500);
+  }
+}
+
 const removeFromCollection = async (req, res) => {
   try {
     const id = req.params.id;
     await db.Collection.destroy({where: {id: id}});
-    res.status(200);
+    res.status(204);
     res.send();
   } catch (err) {
     console.error('error', err);
@@ -95,11 +109,25 @@ const getOneFromWishlist = async (req, res) => {
   }
 }
 
+const updateRatingFromWishlist = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const { rating } = req.body;
+    const recUpdated = await db.Wishlist.update({ rating: rating }, {where: {id: id}});
+    const rec = await db.Wishlist.findOne({where: {id: id}});
+    res.status(200);
+    res.send(rec);
+  } catch (err) {
+    console.error('error', err);
+    res.sendStatus(500);
+  }
+}
+
 const removeFromWishlist = async (req, res) => {
   try {
     const id = req.params.id;
     await db.Wishlist.destroy({where: {id: id}});
-    res.status(200);
+    res.status(204);
     res.send();
   } catch (err) {
     console.error('error', err);
@@ -112,9 +140,11 @@ module.exports = {
   addToCollection,
   getAllFromCollection,
   getOneFromCollection,
+  updateRatingFromCollection,
   removeFromCollection,
   addToWishlist,
   getAllFromWishlist,
   getOneFromWishlist,
+  updateRatingFromWishlist,
   removeFromWishlist
- };
+};
