@@ -40,3 +40,7 @@ button, button:active, button:visited, button:focus, button:hover {
 button:active {
   height: 42px;
 }
+
+a:active {
+  transition: 200ms, ease;
+}

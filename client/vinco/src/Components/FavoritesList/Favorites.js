@@ -8,7 +8,7 @@ function Favorites ({ collectionListRecs }) {
 
     return collectionListRecs
       .filter(record => record.rating > 4)
-      .map(record => <RecordItem record={record} key={record.id} isCollection={true}/>) 
+      .map(record => <RecordItem record={record} key={record.id} isCollection={true}/>);
   }
   
   return (

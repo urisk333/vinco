@@ -9,7 +9,7 @@ import Collection from './Components/CollectionList/Collection';
 import Wishlist from './Components/WishlistList/Wishlist';
 import Favorites from './Components/FavoritesList/Favorites';
 import AddToCollection from './Components/AddToCollection/AddToCollection';
-import { RecRatingContext, RecRemoveContext } from './Context';
+import { RecAddContext, RecRatingContext, RecRemoveContext } from './Context';
 
 function App() {
 
@@ -28,24 +28,21 @@ function App() {
           setUser(user.username)
         })
     } else {
-      console.log('Please fill in all form fields.');
+      return alert('Please fill in all form fields.');
     }
   }
 
-  // console.log('COLLECTION', collectionListRecs)
-  // console.log('WISHLIST', wishlistListRecs)
 
+  function addToCollection (record) {
 
-  // function addToCollection (record) {
-
-  //   ApiService.addToCollection(record)
-  //     .then(newRecord => setCollectionListRecs([...collectionListRecs, newRecord]
-  //       .sort(function (a, b) {
-  //         if (a.artist < b.artist) return -1;
-  //         if (a.artist > b.artist) return 1;
-  //         return 0;
-  //       })));
-  // }
+    ApiService.addToCollection(record)
+      .then(newRecord => setCollectionListRecs([...collectionListRecs, newRecord]
+        .sort(function (a, b) {
+          if (a.artist < b.artist) return -1;
+          if (a.artist > b.artist) return 1;
+          return 0;
+        })));
+  }
 
 
   useEffect(() => {
@@ -60,15 +57,15 @@ function App() {
             });
             setCollectionListRecs(collectionListRecs);
         });
-    }, []);
+    }, [updateRecRatingCollection]);
 
 
   function updateRatingFromCollection (id, rating) {
 
     ApiService.updateRatingFromCollection(id, rating)
       .then(record => {
-        setUpdateRecRatingCollection({...updateRecRatingCollection, [record.rating]: rating})
-      });
+        setUpdateRecRatingCollection({...updateRecRatingCollection, [record.rating]: rating});
+      })
   }
 
   
@@ -79,18 +76,6 @@ function App() {
     setCollectionListRecs(filteredCollection);
   }
     
-
-  // function addToWishlist (record) {
-  
-  //   ApiService.addToWishlist(record)
-  //     .then(newRecord => setCollectionListRecs([...wishlistListRecs, newRecord]
-  //       .sort(function (a, b) {
-  //         if (a.artist < b.artist) return -1;
-  //         if (a.artist > b.artist) return 1;
-  //         return 0;
-  //       })));
-  // }
-
 
   useEffect(() => {
 
@@ -104,14 +89,14 @@ function App() {
             });
             setWishlistListRecs(wishlistListRecs);
         });
-    }, []);
+    }, [updateRecRatingWishlist]);
 
 
   function updateRatingFromWishlist (id, rating) {
 
     ApiService.updateRatingFromWishlist(id, rating)
       .then(record => {
-        setUpdateRecRatingWishlist({...updateRecRatingWishlist, [record.rating]: rating})
+        setUpdateRecRatingWishlist({...updateRecRatingWishlist, [record.rating]: rating});
       });
   }
 
@@ -120,7 +105,6 @@ function App() {
 
     await ApiService.removeFromWishlist(id);
     const filteredCollection = wishlistListRecs.filter(record => record.id !== id);
-    console.log('FILTERED', filteredCollection)
     setWishlistListRecs(filteredCollection);
   }
     
@@ -129,6 +113,7 @@ function App() {
     <div className="App">
       <RecRatingContext.Provider value={{updateRatingFromCollection, updateRatingFromWishlist}} >
       <RecRemoveContext.Provider value={{removeFromCollection, removeFromWishlist}} >
+      <RecAddContext.Provider value={addToCollection} >
       <Router>
         <NavBar />
           <Routes>
@@ -140,6 +125,7 @@ function App() {
             <Route path="/add" element={<AddToCollection />}></Route>
           </Routes>
       </Router>  
+      </RecAddContext.Provider>
       </RecRemoveContext.Provider>
       </RecRatingContext.Provider>
     </div>
