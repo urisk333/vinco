@@ -1,4 +1,4 @@
-![Vinco](./client/vinco/src/Assets/logo?raw=true)
+![Vinco](./client/vinco/src/Assets/logo.jpg?raw=true)
 
 # Vinco
 
@@ -6,7 +6,7 @@ Vinco is the web application where you can store and organize your records colle
 
 # Screenshot
 
-![Vinco front page](./client/vinco/src/Assets/front_page?raw=true)
+![Vinco front page](./client/vinco/src/Assets/front_page.png?raw=true)
 
 # Getting started
 
