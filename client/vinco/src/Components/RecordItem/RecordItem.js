@@ -10,7 +10,6 @@ function RecordItem ({ record, isCollection }) {
   const { removeFromCollection, removeFromWishlist } = useContext(RecRemoveContext);
 
   function handleRatingChange (newRating) {
-
     if (isCollection === true) {
       updateRatingFromCollection(record.id, newRating);
     } else {

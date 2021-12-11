@@ -1,4 +1,3 @@
-import './App.css';
 import React from 'react';
 import { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -19,9 +18,7 @@ function App() {
   const [updateRecRatingCollection, setUpdateRecRatingCollection] = useState({});
   const [updateRecRatingWishlist, setUpdateRecRatingWishlist] = useState({});
 
-
-  const getUser = (username) => {
-    
+  const getUser = (username) => { 
     if (username !== '') {
       ApiService.getLogin(username)
         .then(user => {
@@ -32,9 +29,7 @@ function App() {
     }
   }
 
-
   function addToCollection (record) {
-
     ApiService.addToCollection(record)
       .then(newRecord => setCollectionListRecs([...collectionListRecs, newRecord]
         .sort(function (a, b) {
@@ -44,9 +39,7 @@ function App() {
         })));
   }
 
-
   useEffect(() => {
-      
     ApiService.getAllFromCollection()
         .then(collectionListRecs => {
           collectionListRecs
@@ -59,26 +52,20 @@ function App() {
         });
     }, [updateRecRatingCollection]);
 
-
   function updateRatingFromCollection (id, rating) {
-
     ApiService.updateRatingFromCollection(id, rating)
       .then(record => {
         setUpdateRecRatingCollection({...updateRecRatingCollection, [record.rating]: rating});
       })
   }
 
-  
   async function removeFromCollection (id) {
-
     await ApiService.removeFromCollection(id);
     const filteredCollection = collectionListRecs.filter(record => record.id !== id);
     setCollectionListRecs(filteredCollection);
   }
     
-
   useEffect(() => {
-
     ApiService.getAllFromWishlist()
         .then(wishlistListRecs => {
           wishlistListRecs
@@ -91,24 +78,19 @@ function App() {
         });
     }, [updateRecRatingWishlist]);
 
-
   function updateRatingFromWishlist (id, rating) {
-
     ApiService.updateRatingFromWishlist(id, rating)
       .then(record => {
         setUpdateRecRatingWishlist({...updateRecRatingWishlist, [record.rating]: rating});
       });
   }
 
-
   async function removeFromWishlist (id) {
-
     await ApiService.removeFromWishlist(id);
     const filteredCollection = wishlistListRecs.filter(record => record.id !== id);
     setWishlistListRecs(filteredCollection);
   }
     
-
   return (
     <div className="App">
       <RecRatingContext.Provider value={{updateRatingFromCollection, updateRatingFromWishlist}} >
